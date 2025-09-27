@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soul Bloom | eBooks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#F6F2EB; --panel:#FFFFFF; --tinta:#3C3A36; --suave:#7D7A74;
+      --areia:#DCC9AA; --argila:#C9A190; --linho:#E9DECF; --oliva:#9A9E75; --rose:#CBAA99; --acento:#8D7E6A;
+      --raio:18px; --sombra:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0; background:linear-gradient(180deg,#f7f4ee,#efe9df 60%,#f7f4ee); color:var(--tinta); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; line-height:1.6}
+    .container{width:min(1100px,92%); margin-inline:auto}
+
+    .site-header{position:sticky; top:0; z-index:1000; background:rgba(255,255,255,.8); backdrop-filter:saturate(1.2) blur(10px); border-bottom:1px solid #eee}
+    .header-wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:baseline; gap:8px; text-decoration:none; color:var(--tinta)}
+    .brand-mark{font-size:18px; color:var(--acento)}
+    .brand-name{font-family:"Playfair Display", serif; font-weight:700}
+    .brand-sub{font-size:12px; color:var(--suave); margin-left:4px}
+    .nav{display:flex; gap:22px; align-items:center}
+    .nav a{color:var(--tinta); text-decoration:none; font-weight:500}
+    .btn-outline{padding:8px 14px; border:1px solid #d8d3cb; border-radius:999px}
+    .nav-toggle{display:none; background:none; border:0}
+    .nav-toggle span{display:block; width:22px; height:2px; background:#333; margin:5px 0}
+
+    .hero{position:relative; overflow:clip}
+    .hero-bg{position:absolute; inset:0; background:radial-gradient(1200px 500px at 10% 10%, rgba(255,255,255,.6), transparent 60%), url('assets/hero.jpg') center/cover no-repeat; filter:saturate(.85) contrast(1.02) brightness(.98); opacity:.85}
+    .hero-grid{position:relative; z-index:1; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; padding:64px 0 48px}
+    .hero-copy h1{font-family:"Playfair Display", serif; font-size:40px; line-height:1.2; margin:0 0 10px}
+    .cta-row{display:flex; gap:12px; margin-top:16px}
+    .btn,.btn-soft{border-radius:999px; padding:10px 16px; border:0; cursor:pointer; text-decoration:none; font-weight:600}
+    .btn{background:var(--oliva); color:#fff; box-shadow:var(--sombra)}
+    .btn-soft{background:#fff; color:var(--tinta); border:1px solid #e6e0d7}
+    .hero-portrait{display:flex; flex-direction:column; align-items:center}
+    .wreath{position:relative; width:210px; height:210px; border-radius:50%; background:conic-gradient(from 90deg,#e9e2d6,#f4efe6); box-shadow:var(--sombra)}
+    .wreath img{position:absolute; inset:12px; width:calc(100% - 24px); height:calc(100% - 24px); border-radius:50%; object-fit:cover; border:6px solid #fff}
+    .author-name{margin-top:8px; font-family:"Playfair Display", serif; font-weight:700}
+
+    .welcome{padding:28px 0 18px}
+    .welcome h2{font-family:"Playfair Display", serif; margin:0 0 6px}
+    .welcome p{color:var(--suave); margin:0 0 12px}
+
+    /* Quadrados marrons com texto branco */
+    .welcome-row{display:flex; flex-wrap:wrap; align-items:center; gap:14px}
+    .cta-pill{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 16px; border-radius:18px;
+      background:var(--rose); color:#fff; text-decoration:none; font-weight:700; /* texto branco */
+      box-shadow:var(--sombra);
+    }
+
+    /* Cards */
+    .products{padding:20px 0 48px}
+    .section-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+    .section-head h3{font-family:"Playfair Display", serif; margin:0}
+    .cards{display:grid; grid-template-columns:repeat( auto-fit, minmax(220px, 1fr) ); gap:16px}
+    .card{background:var(--panel); border-radius:var(--raio); box-shadow:var(--sombra); overflow:hidden; display:flex; flex-direction:column}
+    .cover img{width:100%; height:260px; object-fit:cover}
+    .card[data-sku="secreto"] .cover img{ object-position: 50% 40%; }
+    .card[data-sku="intimidade"] .cover img{ object-position: 50% 0%; }
+    .card[data-sku="processo"] .cover img{ object-position: 50% 50%; }
+    .caption{padding:8px; font-weight:700; text-align:center; font-size:15px}
+    .card-body{padding:10px}
+    .card-body p{color:var(--suave); margin:0 0 10px; font-size:13.5px}
+    .price-row{display:flex; align-items:center; justify-content:space-between}
+    .price{font-weight:700; font-size:14px}
+    .btn.add{background:var(--argila); color:#fff; padding:9px 12px; font-size:14px}
+
+    /* Rodapé apenas nomes em linha, sem fundo */
+    .site-footer{border-top:1px solid #eee; background:#fff}
+    .footer-grid{display:grid; grid-template-columns:1fr auto; gap:20px; padding:20px 0; align-items:center}
+    .brand-col p{margin:6px 0 0; color:var(--suave)}
+    .social-inline{display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+    .social-inline a{color:var(--tinta); text-decoration:underline}
+    .social-inline a + a::before{content:" | "; margin-right:6px; color:var(--suave)}
+
+    /* Carrinho e Lightbox */
+    .cart-drawer{position:fixed; right:0; top:0; bottom:0; width:min(380px, 92%); background:#fff; box-shadow:-10px 0 30px rgba(0,0,0,.15); transform:translateX(100%); transition:.35s ease; z-index:1200; display:flex; flex-direction:column}
+    .cart-drawer.open{transform:none}
+    .cart-header{display:flex; align-items:center; justify-content:space-between; padding:14px; border-bottom:1px solid #eee}
+    .cart-items{flex:1; overflow:auto; padding:10px 14px; display:grid; gap:10px}
+    .cart-item{display:grid; grid-template-columns:60px 1fr auto; gap:10px; align-items:center}
+    .cart-item img{width:60px; height:60px; object-fit:cover; border-radius:10px}
+    .cart-footer{padding:14px; border-top:1px solid #eee}
+    .overlay{position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:1100}
+
+    .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.8); display:flex; align-items:center; justify-content:center; z-index:2000; opacity:0; pointer-events:none; transition:.25s}
+    .lightbox.open{opacity:1; pointer-events:auto}
+    .lightbox img{max-width:92vw; max-height:92vh; object-fit:contain; box-shadow:0 20px 60px rgba(0,0,0,.5); border-radius:12px}
+    .lightbox .close{position:absolute; top:12px; right:12px; background:#fff; border:0; border-radius:999px; padding:8px 12px; cursor:pointer}
+
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr; gap:22px; padding:44px 0}
+      .nav{display:none}
+      .nav-toggle{display:block}
+      .footer-grid{grid-template-columns:1fr; justify-items:center; text-align:center}
+      .social-inline{justify-content:center}
+      .cover img{height:300px}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="brand" href="#"><span class="brand-mark">✤</span><span class="brand-name">Soul Bloom</span><span class="brand-sub">Ministério</span></a>
+      <nav class="nav">
+        <a href="#sobre">Sobre</a>
+        <a href="#blog">Blog</a>
+        <a href="#produtos">Produtos</a>
+        <a class="btn-outline" href="#contato">Contato</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Do medo ao florescer: abrace a força que Deus concedeu</h1>
+          <div class="cta-row">
+            <a class="btn" href="#ebooks">Ver eBooks</a>
+            <a class="btn-soft" href="#newsletter">Receber novidades</a>
+          </div>
+        </div>
+        <div class="hero-portrait">
+          <div class="wreath">
+            <img src="autora.jpeg" alt="Cintia Guida" />
+          </div>
+          <div class="author-name">Cintia Guida</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="welcome">
+      <div class="container">
+        <h2>Bem-vinda, querida irmã.</h2>
+        <p>Sou Cintia, psicóloga e escritora cristã, e guio jornadas práticas de cura e restauração fundamentadas na Palavra.</p>
+
+        <!-- Quadrados marrons com texto branco -->
+        <div class="welcome-row">
+          <a class="cta-pill" href="#podcast">Spotify Guidacast</a>
+          <a class="cta-pill" href="#" target="_blank" rel="noopener">Instagram @cintiaguida.escritora</a>
+          <a class="cta-pill" href="#" target="_blank" rel="noopener">TikTok @cintiaguida.escritora</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos" class="products">
+      <div class="container">
+        <div class="section-head">
+          <h3>eBooks em destaque</h3>
+          <a class="link-all" href="#ebooks">Ver todos</a>
+        </div>
+        <div id="cards" class="cards">
+          <article class="card" data-sku="secreto">
+            <div class="cover">
+              <img src="secreto.jpeg" alt="Capa do ebook No Secreto com Deus" />
+            </div>
+            <div class="caption">No Secreto com Deus</div>
+            <div class="card-body">
+              <p>Diário devocional inspirado no Salmo 139 para 15 dias de transformação espiritual.</p>
+              <div class="price-row">
+                <span class="price">R$ 39,90</span>
+                <button class="btn add" data-id="1" data-cover="secreto.jpeg">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card" data-sku="intimidade">
+            <div class="cover">
+              <img src="intimidade.jpeg" alt="Capa do ebook Intimidade" />
+            </div>
+            <div class="caption">Intimidade</div>
+            <div class="card-body">
+              <p>Uma jornada de conexão com Deus em 15 dias, com exercícios e reflexões práticas.</p>
+              <div class="price-row">
+                <span class="price">R$ 29,90</span>
+                <button class="btn add" data-id="2" data-cover="intimidade.jpeg">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card" data-sku="processo">
+            <div class="cover">
+              <img src="Processotransformador.jpg" alt="Capa do ebook Processo Transformador" />
+            </div>
+            <div class="caption">Processo Transformador</div>
+            <div class="card-body">
+              <p>Um caminho de renovação espiritual e crescimento, das raízes aos frutos.</p>
+              <div class="price-row">
+                <span class="price">R$ 34,90</span>
+                <button class="btn add" data-id="3" data-cover="Processotransformador.jpg">Comprar</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+      <div class="container">
+        <h3>Receba guias, devocionais e novidades</h3>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Seu e‑mail" aria-label="Seu e‑mail" required />
+          <button class="btn" type="submit">Quero receber</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="brand-col">
+        <a class="brand" href="#"><span class="brand-mark">✤</span><span class="brand-name">Soul Bloom</span></a>
+        <p>© 2025 Soul Bloom Ministério</p>
+      </div>
+      <!-- Apenas nomes em linha, sem fundo -->
+      <div class="social-inline" id="foot-nav">
+        <a href="#" target="_blank" rel="noopener">Instagram @cintiaguida.escritora</a>
+        <a href="#" target="_blank" rel="noopener">TikTok @cintiaguida.escritora</a>
+        <a href="#podcast">Spotify Guidacast</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Carrinho -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <h4>Seu carrinho</h4>
+      <button id="closeCart" aria-label="Fechar">×</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="totals">
+        <span>Total</span>
+        <strong id="cartTotal">R$ 0,00</strong>
+      </div>
+      <a class="btn" href="#checkout">Finalizar compra</a>
+      <p class="muted">Pagamento via Pix, Cartão ou PayPal.</p>
+    </div>
+  </aside>
+  <div id="overlay" class="overlay" hidden></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="close" aria-label="Fechar">Fechar ×</button>
+    <img id="lightboxImg" src="" alt="Capa do ebook em tamanho completo">
+  </div>
+
+  <script>
+    const estado = {
+      itens: [
+        {id:1, titulo:'No Secreto com Deus', preco:39.9, imagem:'secreto.jpeg'},
+        {id:2, titulo:'Intimidade', preco:29.9, imagem:'intimidade.jpeg'},
+        {id:3, titulo:'Processo Transformador', preco:34.9, imagem:'Processotransformador.jpg'}
+      ],
+      carrinho: []
+    };
+    const moeda = v => v.toLocaleString('pt-BR',{style:'currency', currency:'BRL'});
+
+    function adicionar(id){
+      const item = estado.itens.find(i=>i.id===id);
+      const existe = estado.carrinho.find(i=>i.id===id);
+      if(existe){ existe.qtd+=1 } else { estado.carrinho.push({...item, qtd:1}) }
+      renderizarCarrinho();
+    }
+    function remover(id){ estado.carrinho = estado.carrinho.filter(i=>i.id!==id); renderizarCarrinho(); }
+    function alterarQtd(id, delta){
+      const it = estado.carrinho.find(i=>i.id===id); if(!it) return;
+      it.qtd += delta; if(it.qtd<=0) remover(id); renderizarCarrinho();
+    }
+    function renderizarCarrinho(){
+      const lista = document.getElementById('cartItems');
+      const total = document.getElementById('cartTotal');
+      const botao = document.getElementById('openCart');
+      lista.innerHTML = ''; let soma = 0;
+      estado.carrinho.forEach(item=>{
+        soma += item.preco*item.qtd;
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <img src="${item.imagem}" alt="${item.titulo}">
+          <div>
+            <strong>${item.titulo}</strong>
+            <div class="muted">${moeda(item.preco)} x ${item.qtd}</div>
+          </div>
+          <div>
+            <button class="btn-soft" aria-label="Diminuir" onclick="alterarQtd(${item.id}, -1)">−</button>
+            <button class="btn-soft" aria-label="Aumentar" onclick="alterarQtd(${item.id}, 1)">+</button>
+            <button class="btn-soft" aria-label="Remover" onclick="remover(${item.id})">×</button>
+          </div>`;
+        lista.appendChild(row);
+      });
+      if(total) total.textContent = soma.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+      if(botao) botao.textContent = `Carrinho (${estado.carrinho.reduce((a,b)=>a+b.qtd,0)})`;
+    }
+
+    const drawer = document.getElementById('cartDrawer');
+    const overlay = document.getElementById('overlay');
+    function abrirCarrinho(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); overlay.hidden = false; }
+    function fecharCarrinho(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); overlay.hidden = true; }
+    document.getElementById('openCart')?.addEventListener('click', abrirCarrinho);
+    document.getElementById('closeCart')?.addEventListener('click', fecharCarrinho);
+    overlay.addEventListener('click', fecharCarrinho);
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLb = lightbox.querySelector('.close');
+    function abrirLightbox(src){ lightboxImg.src = src; lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); }
+    function fecharLightbox(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; }
+    closeLb.addEventListener('click', fecharLightbox);
+    lightbox.addEventListener('click', (e)=>{ if(e.target===lightbox) fecharLightbox(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') fecharLightbox(); });
+
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.btn.add');
+      if(!btn) return;
+      const id = Number(btn.dataset.id);
+      const cover = btn.dataset.cover;
+      if(id) adicionar(id);
+      abrirCarrinho();
+      if(cover) abrirLightbox(cover);
+    });
+
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.nav');
+    toggle?.addEventListener('click', ()=>{ nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex'; });
+  </script>
+
+  <!-- JivoChat -->
+  <script src="//code.jivosite.com/widget/iRmgUdh3pv" async></script>
+</body>
+</html>
