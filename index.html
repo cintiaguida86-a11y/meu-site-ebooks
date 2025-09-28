@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Soul Bloom | eBooks</title>
+  <title>Soul Bloom | Livros</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,23 +41,21 @@
     .btn-soft{background:#fff; color:var(--tinta); border:1px solid #e6e0d7}
     .hero-portrait{display:flex; flex-direction:column; align-items:center}
     .wreath{position:relative; width:210px; height:210px; border-radius:50%; background:conic-gradient(from 90deg,#e9e2d6,#f4efe6); box-shadow:var(--sombra)}
-    .wreath img{position:absolute; inset:12px; width:calc(100% - 24px); height:calc(100% - 24px); border-radius:50%; object-fit:cover; border:6px solid #fff}
+    .wreath img{position:absolute; inset:12px; width:calc(100% - 24px); height:calc(100% - 24px); border-radius:50%; object-fit:cover; object-position:top; border:6px solid #fff}
     .author-name{margin-top:8px; font-family:"Playfair Display", serif; font-weight:700}
 
     .welcome{padding:28px 0 18px}
     .welcome h2{font-family:"Playfair Display", serif; margin:0 0 6px}
     .welcome p{color:var(--suave); margin:0 0 12px}
 
-    /* Quadrados marrons com texto branco */
     .welcome-row{display:flex; flex-wrap:wrap; align-items:center; gap:14px}
     .cta-pill{
       display:inline-flex; align-items:center; justify-content:center;
       padding:12px 16px; border-radius:18px;
-      background:var(--rose); color:#fff; text-decoration:none; font-weight:700; /* texto branco */
+      background:var(--rose); color:#fff; text-decoration:none; font-weight:700;
       box-shadow:var(--sombra);
     }
 
-    /* Cards */
     .products{padding:20px 0 48px}
     .section-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
     .section-head h3{font-family:"Playfair Display", serif; margin:0}
@@ -73,8 +71,8 @@
     .price-row{display:flex; align-items:center; justify-content:space-between}
     .price{font-weight:700; font-size:14px}
     .btn.add{background:var(--argila); color:#fff; padding:9px 12px; font-size:14px}
+    .btn.add:disabled{background:var(--suave); cursor:not-allowed;}
 
-    /* Rodapé apenas nomes em linha, sem fundo */
     .site-footer{border-top:1px solid #eee; background:#fff}
     .footer-grid{display:grid; grid-template-columns:1fr auto; gap:20px; padding:20px 0; align-items:center}
     .brand-col p{margin:6px 0 0; color:var(--suave)}
@@ -82,7 +80,6 @@
     .social-inline a{color:var(--tinta); text-decoration:underline}
     .social-inline a + a::before{content:" | "; margin-right:6px; color:var(--suave)}
 
-    /* Carrinho e Lightbox */
     .cart-drawer{position:fixed; right:0; top:0; bottom:0; width:min(380px, 92%); background:#fff; box-shadow:-10px 0 30px rgba(0,0,0,.15); transform:translateX(100%); transition:.35s ease; z-index:1200; display:flex; flex-direction:column}
     .cart-drawer.open{transform:none}
     .cart-header{display:flex; align-items:center; justify-content:space-between; padding:14px; border-bottom:1px solid #eee}
@@ -112,10 +109,8 @@
     <div class="container header-wrap">
       <a class="brand" href="#"><span class="brand-mark">✤</span><span class="brand-name">Soul Bloom</span><span class="brand-sub">Ministério</span></a>
       <nav class="nav">
-        <a href="#sobre">Sobre</a>
-        <a href="#blog">Blog</a>
-        <a href="#produtos">Produtos</a>
-        <a class="btn-outline" href="#contato">Contato</a>
+        <a href="#produtos">Livros</a>
+        <a class="btn-outline" href="#contato">Convite para ministrações</a>
       </nav>
       <button class="nav-toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
     </div>
@@ -128,7 +123,7 @@
         <div class="hero-copy">
           <h1>Do medo ao florescer: abrace a força que Deus concedeu</h1>
           <div class="cta-row">
-            <a class="btn" href="#ebooks">Ver eBooks</a>
+            <a class="btn" href="#livros">Ver livros</a>
             <a class="btn-soft" href="#newsletter">Receber novidades</a>
           </div>
         </div>
@@ -145,8 +140,6 @@
       <div class="container">
         <h2>Bem-vinda, querida irmã.</h2>
         <p>Sou Cintia, psicóloga e escritora cristã, e guio jornadas práticas de cura e restauração fundamentadas na Palavra.</p>
-
-        <!-- Quadrados marrons com texto branco -->
         <div class="welcome-row">
           <a class="cta-pill" href="#podcast">Spotify Guidacast</a>
           <a class="cta-pill" href="#" target="_blank" rel="noopener">Instagram @cintiaguida.escritora</a>
@@ -158,27 +151,27 @@
     <section id="produtos" class="products">
       <div class="container">
         <div class="section-head">
-          <h3>eBooks em destaque</h3>
-          <a class="link-all" href="#ebooks">Ver todos</a>
+          <h3>Livros em destaque</h3>
+          <a class="link-all" href="#livros">Ver todos</a>
         </div>
         <div id="cards" class="cards">
           <article class="card" data-sku="secreto">
             <div class="cover">
-              <img src="secreto.jpeg" alt="Capa do ebook No Secreto com Deus" />
+              <img src="secreto.jpeg" alt="Capa do livro No Secreto com Deus" />
             </div>
             <div class="caption">No Secreto com Deus</div>
             <div class="card-body">
               <p>Diário devocional inspirado no Salmo 139 para 15 dias de transformação espiritual.</p>
               <div class="price-row">
-                <span class="price">R$ 39,90</span>
-                <button class="btn add" data-id="1" data-cover="secreto.jpeg">Comprar</button>
+                <span class="price" hidden>R$ 39,90</span>
+                <button class="btn add" data-id="1" data-cover="secreto.jpeg" disabled>Em breve ⏰</button>
               </div>
             </div>
           </article>
 
           <article class="card" data-sku="intimidade">
             <div class="cover">
-              <img src="intimidade.jpeg" alt="Capa do ebook Intimidade" />
+              <img src="intimidade.jpeg" alt="Capa do livro Intimidade" />
             </div>
             <div class="caption">Intimidade</div>
             <div class="card-body">
@@ -192,14 +185,14 @@
 
           <article class="card" data-sku="processo">
             <div class="cover">
-              <img src="Processotransformador.jpg" alt="Capa do ebook Processo Transformador" />
+              <img src="Processotransformador.jpg" alt="Capa do livro Processo Transformador" />
             </div>
             <div class="caption">Processo Transformador</div>
             <div class="card-body">
               <p>Um caminho de renovação espiritual e crescimento, das raízes aos frutos.</p>
               <div class="price-row">
-                <span class="price">R$ 34,90</span>
-                <button class="btn add" data-id="3" data-cover="Processotransformador.jpg">Comprar</button>
+                <span class="price" hidden>R$ 34,90</span>
+                <button class="btn add" data-id="3" data-cover="Processotransformador.jpg" disabled>Em breve ⏰</button>
               </div>
             </div>
           </article>
@@ -224,7 +217,6 @@
         <a class="brand" href="#"><span class="brand-mark">✤</span><span class="brand-name">Soul Bloom</span></a>
         <p>© 2025 Soul Bloom Ministério</p>
       </div>
-      <!-- Apenas nomes em linha, sem fundo -->
       <div class="social-inline" id="foot-nav">
         <a href="#" target="_blank" rel="noopener">Instagram @cintiaguida.escritora</a>
         <a href="#" target="_blank" rel="noopener">TikTok @cintiaguida.escritora</a>
@@ -324,7 +316,7 @@
 
     document.addEventListener('click', (e)=>{
       const btn = e.target.closest('.btn.add');
-      if(!btn) return;
+      if(!btn || btn.disabled) return;
       const id = Number(btn.dataset.id);
       const cover = btn.dataset.cover;
       if(id) adicionar(id);
